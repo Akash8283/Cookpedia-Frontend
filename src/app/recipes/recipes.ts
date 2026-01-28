@@ -5,6 +5,8 @@ import { ApiService } from '../services/api-service';
 import { SearchPipe } from '../pipes/search-pipe';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { Toast, ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipes',
@@ -21,6 +23,8 @@ export class Recipes {
     mealTypeArray:any = signal([])
     cuisineArray:any = signal([])
     api = inject(ApiService)
+    router = inject(Router)
+    toaster = inject(ToastrService)
 
     ngOnInit(){
       this.getAllRecipes()
@@ -44,5 +48,14 @@ export class Recipes {
 
     filterRecipe(key:string,value:string){
       this.allRecipes.set(this.dummyAllRecipes.filter((item:any)=>item[key]==value))
+    }
+
+    viewRecipe(recipeId:string){
+      if (sessionStorage.getItem("token")) {
+        this.router.navigateByUrl(`recipes/${recipeId}/view`)
+      }
+      else{
+        this.toaster.info("Please Login to access Recipes Details")
+      }
     }
 }

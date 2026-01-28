@@ -17,11 +17,19 @@
             <i class="fa-solid fa-graduation-cap"></i> Cookpedia
           </h4>
 
-          <input type="text" class="form-control mb-3" placeholder="Username">
-          <input type="email" class="form-control mb-3" placeholder="E Mail">
-          <input type="password" class="form-control mb-4" placeholder="Password">
+         <form [formGroup]="registerForm" (ngSubmit)="register()" >
+            <input name="username" formControlName="username" type="text" class="form-control mb-3" placeholder="Username">
+            @if (registerForm.get('username')?.errors && registerForm.get('username')?.touched) {<div class="text-danger mb-2">Invalid Username</div>}
 
-          <button class="btn btn-success w-100">register</button>
+            <input name="email" formControlName="email" type="email" class="form-control mb-3" placeholder="E Mail">
+            @if (registerForm.get('email')?.errors && registerForm.get('email')?.touched) {<div class="text-danger mb-2">Invalid Email</div>}
+
+            <input name="password" formControlName="password" type="password" class="form-control mb-3" placeholder="Password">
+            @if (registerForm.get('password')?.errors && registerForm.get('password')?.touched) {<div class="text-danger mb-2">Invalid Password</div>}
+  
+            <button type="submit" class="btn btn-success w-100">register</button>
+         </form>
+
         </div>
       </div>
 
