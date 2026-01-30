@@ -72,4 +72,15 @@ export class ApiService {
   getUserDownloadListAPI(){
     return this.http.get(`${this.server_url}/user-downloads`,this.appendToken())
   }
+
+  // put reqst by profile component when pic uploads
+  editUserPictureAPI(reqBody:any){
+    return this.http.put(`${this.server_url}/user-edit`,reqBody,this.appendToken())
+  }
+
+  // get rqst by home page component when it loads
+  getApprovedFeedbackAPI(){
+    return this.http.get(`${this.server_url}/feedbacks-approve`)
+  }
+
 }

@@ -19,12 +19,16 @@ export class ViewRecipe {
   recipe:any = signal({})
   api = inject(ApiService) 
   activateRoute = inject(ActivatedRoute)
-  recipeId:string = this.activateRoute.snapshot.params['id']
+  recipeId:string = ""
   router = inject(Router)
   toaster = inject(ToastrService)
 
   ngOnInit(){
-    this.getRecipe(this.recipeId)
+    this.activateRoute.params.subscribe((res:any)=>{
+      this.recipeId = res['id']
+      this.getRecipe(this.recipeId)
+    })
+
   }
 
   getRecipe(recipeId:string){
