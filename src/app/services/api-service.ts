@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { recipeModel } from '../admin/model/recipeModel';
 
 @Injectable({
   providedIn: 'root',
@@ -81,6 +82,31 @@ export class ApiService {
   // get rqst by home page component when it loads
   getApprovedFeedbackAPI(){
     return this.http.get(`${this.server_url}/feedbacks-approve`)
+  }
+
+  // get reqst by admin userlist component when page loads
+  getUserListAPI(){
+    return this.http.get(`${this.server_url}/user-list`,this.appendToken())
+  }
+
+  // get reqst by admin downloadlist component when page loads
+  getDownloadListAPI(){
+    return this.http.get(`${this.server_url}/downloads`,this.appendToken())
+  }
+
+  // get reqst by admin feedback component when page loads
+  getFeedbackListAPI(){
+    return this.http.get(`${this.server_url}/feedbacks`,this.appendToken())
+  }
+
+  // put reqst by admin feedback component when approve/reject btn clicked
+  updateFeedbackStatusAPI(id:string,reqBody:any){
+    return this.http.put(`${this.server_url}/feedbacks/${id}`,reqBody,this.appendToken())
+  }
+
+  // post reqst by admin manage recipe component when add recipe button clicked
+  addRecipeAPI(reqBody:recipeModel){
+    return this.http.post(`${this.server_url}/recipes`,reqBody,this.appendToken())
   }
 
 }

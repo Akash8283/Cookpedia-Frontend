@@ -18,6 +18,7 @@ export class Home {
  
    ngOnInit(){
     this.getAllRecipes()
+    this.getFeedbacks()
    }
     
    getAllRecipes(){

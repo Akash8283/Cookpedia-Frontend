@@ -9,7 +9,7 @@
             <input name="email" formControlName="email" type="text" class="form-control mt-5" placeholder="Email">
             @if (loginForm.get('email')?.errors && loginForm.get('email')?.touched) {<div class="text-danger mb-2">Invalid Email</div>}
 
-            <input name="password" formControlName="password" type="text" class="form-control mt-3" placeholder="Password">
+            <input name="password" formControlName="password" type="password" class="form-control mt-3" placeholder="Password">
             @if (loginForm.get('password')?.errors && loginForm.get('password')?.touched) {<div class="text-danger mb-2">Invalid Password</div>}
 
             <button type="submit" class="btn btn-success mt-3 w-100">LOGIN</button>

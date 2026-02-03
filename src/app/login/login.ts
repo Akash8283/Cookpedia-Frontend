@@ -37,7 +37,12 @@ export class Login {
           this.toaster.success("User login successfull")
           this.loginForm.reset()
           setTimeout(()=>{
-            this.router.navigateByUrl('/')
+            if (res.user.role=="user") {
+              this.router.navigateByUrl('/')
+            }
+            else{
+              this.router.navigateByUrl('/admin')
+            }
           },2000)
         },
         error:(reason:any)=>{
