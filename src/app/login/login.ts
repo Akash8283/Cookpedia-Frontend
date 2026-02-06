@@ -35,6 +35,7 @@ export class Login {
           sessionStorage.setItem("token",res.token)
           sessionStorage.setItem("user",JSON.stringify(res.user))
           this.toaster.success("User login successfull")
+          this.api.getChartData()
           this.loginForm.reset()
           setTimeout(()=>{
             if (res.user.role=="user") {

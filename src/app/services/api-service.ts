@@ -109,4 +109,36 @@ export class ApiService {
     return this.http.post(`${this.server_url}/recipes`,reqBody,this.appendToken())
   }
 
+  // delete reqst by admin recipe component when delete recipe button clicked
+  removeRecipeAPI(id:string){
+    return this.http.delete(`${this.server_url}/recipes/${id}`,this.appendToken())
+  }
+
+  // edit reqst by admin manage recipe component when update recipe button clicked
+  editRecipeAPI(id:string,reqBody:recipeModel){
+    return this.http.put(`${this.server_url}/recipes/${id}`,reqBody,this.appendToken())
+  }
+
+  getChartData(){
+    this.getDownloadListAPI().subscribe((res:any)=>{
+      let downloadlistArray:any = []  
+      let output:any = {}
+      res.forEach((item:any)=>{
+        let cuisine = item.cuisine
+        let currentCount = item.count
+        if (cuisine in output) {
+          output[cuisine] += currentCount
+        }
+        else{
+          output[cuisine] = currentCount
+        }
+      })
+      console.log(downloadlistArray);
+      for(let cuisine in output){
+        downloadlistArray.push({name:cuisine,y:output[cuisine]})
+      }
+      localStorage.setItem("chart",JSON.stringify(downloadlistArray))
+    })
+  }
+
 }

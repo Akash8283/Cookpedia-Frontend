@@ -61,6 +61,7 @@ export class ViewRecipe {
     this.api.addToDownloadAPI(this.recipeId,{name:this.recipe().name,cuisine:this.recipe().cuisine,image:this.recipe().image}).subscribe({
       next:((res:any)=>{
         console.log(res);
+        this.api.getChartData()
         this.pdfRecipe()
       }),
       error:(reason:any)=>{
